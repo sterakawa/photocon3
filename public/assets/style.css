@@ -70,7 +70,7 @@
   object-fit: cover;
 }
 
-/* 下側だけのオーバーレイ。全面を覆わない */
+/* 下側だけのオーバーレイ。全面を覆わない 
 .thumb-overlay {
   position: absolute;
   left: 0; right: 0; bottom: 0;
@@ -83,7 +83,7 @@
   color: #fff;
   z-index: 2;
 }
-
+ */
 /* ♥バッジは右上に固定 */
 .like-badge {
   position: absolute;
