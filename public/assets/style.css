@@ -85,3 +85,11 @@
   object-fit:contain;       /* ← 縦横どちらも比率維持、トリミング無し */
   display:block;
 }
+/* Lightbox コメント部 */
+#lbAuthorComment, #lbAiComment {
+  line-height: 1.4;
+}
+#lbAuthorCommentText, #lbAiCommentText {
+  display: inline-block;
+  margin-left: .25rem;
+}
