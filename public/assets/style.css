@@ -1,1 +1,15 @@
-
+/* 追加の見た目調整（最小限） */
+.card-thumb {
+  position: relative;
+  overflow: hidden;
+  border-radius: .75rem;
+}
+.card-thumb img {
+  transition: transform .3s ease;
+}
+.card-thumb:hover img {
+  transform: scale(1.05);
+}
+.badge-count {
+  font-variant-numeric: tabular-nums;
+}
