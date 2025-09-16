@@ -52,3 +52,41 @@
 /* 不要ならコメントアウト（赤一色の原因がこれなら削除）
 .card-thumb::before { ... }
 */
+/* ==== 赤ベタが出る時の強制リセット ==== */
+/* どの要素にも赤背景が当たっていても透明にする */
+.card-thumb,
+.card-thumb::before,
+.ratio,
+.ratio::before {
+  background: transparent !important;
+}
+
+/* 画像は常に全面フィット */
+.card-thumb .thumb-img {
+  position: absolute; /* .ratio の子は絶対配置でOK */
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* 下側だけのオーバーレイ。全面を覆わない */
+.thumb-overlay {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  top: auto !important;            /* ← ここが重要 */
+  height: auto;
+  min-height: 48px;
+  padding: .5rem .6rem;
+  background: linear-gradient(to top, rgba(0,0,0,.60), rgba(0,0,0,0) 70%) !important;
+  pointer-events: none;
+  color: #fff;
+  z-index: 2;
+}
+
+/* ♥バッジは右上に固定 */
+.like-badge {
+  position: absolute;
+  top: .5rem; right: .5rem;
+  z-index: 3;
+}
