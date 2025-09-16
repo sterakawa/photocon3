@@ -1,87 +1,62 @@
-/* =========================================================
-   Photocon Gallery (Bootstrap) - style.css 置き換え版
-   ・赤ベタ対策：背景は常に透明、♥バッジは自前色
-   ・重複定義を整理し、意図しない ::before 背景を無効化
-   ========================================================= */
-
-/* 件数バッジの桁ズレ防止 */
-.badge-count {
-  font-variant-numeric: tabular-nums;
-}
-
-/* ---- カード土台 ---- */
+/* 画像カード共通 */
 .card-thumb {
   position: relative;
   overflow: hidden;
   border-radius: .75rem;
-  background: transparent !important;  /* 予防：常に透明 */
 }
-
-/* ratio ヘルパーの擬似要素も強制透明（赤ベタ対策） */
-.card-thumb::before,
-.ratio::before {
-  background: transparent !important;
-}
-
-/* ---- 画像 ---- */
-.thumb-img {
-  position: absolute;   /* ratio 内で全面フィット */
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.card-thumb img {
   transition: transform .3s ease;
 }
-.card-thumb:hover .thumb-img {
+.card-thumb:hover img {
   transform: scale(1.05);
 }
 
-/* ---- 下側のタイトルエリア ---- */
-.thumb-overlay {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  padding: .5rem .6rem;
-  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 70%) !important;
-  pointer-events: none;
-  color: #fff;
-  z-index: 2;
-
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 2px;
+/* 画像をきっちりフィット */
+.thumb-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
-/* タイトルと投稿者名のスタイル */
+/* 下側だけ黒グラデでタイトル/投稿者を表示 */
+.thumb-overlay {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;              /* ← 下に固定 */
+  padding: .5rem .6rem;
+  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 70%);
+  color: #fff;
+  z-index: 2;
+}
 .thumb-title {
-  font-size: .9rem;
+  font-size: .85rem;
   font-weight: 600;
   line-height: 1.2;
 }
 .thumb-author {
   font-size: .75rem;
-  opacity: 0.9;
+  opacity: .85;
 }
 
-/* ---- 右上の ♥ バッジ ----
-   ※ Bootstrap の text-bg-* は使わず自前色にする（全面赤の原因対策） */
+/* 右上 ♥ バッジ */
 .like-badge {
   position: absolute;
   top: .5rem;
   right: .5rem;
-  padding: .25rem .45rem;
-  border-radius: .5rem;
-  background: rgba(0,0,0,.55) !important; /* 自前の半透明黒 */
-  color: #fff !important;
   z-index: 3;
-  font-weight: 600;
-  font-variant-numeric: tabular-nums;
+  background: rgba(0,0,0,.6);
+  color: #fff;
+  font-size: .75rem;
+  padding: .25rem .5rem;
+  border-radius: .5rem;
 }
 
-/* 予防：どこかで赤背景が付与されても無効化 */
+/* 赤ベタ強制リセット（Bootstrap ratioの背景打ち消し） */
 .card-thumb,
-.card-thumb *,
-.ratio {
-  background-color: transparent !important;
+.card-thumb::before,
+.ratio,
+.ratio::before {
   background: transparent !important;
 }
