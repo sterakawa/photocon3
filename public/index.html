@@ -69,26 +69,57 @@
   </main>
 
   <!-- Lightbox Modal (Bootstrap) -->
-  <div class="modal fade" id="lightbox" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog modal-xl modal-dialog-centered">
-      <div class="modal-content">
-        <div class="modal-body p-0">
-          <!-- ★ ここを原盤比率厳守のキャンバス表示に変更 -->
-          <div class="lb-canvas">
-            <img id="lightboxImage" src="" alt="拡大画像">
-          </div>
+<div class="modal fade" id="lightbox" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-xl modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-body p-0">
+        <!-- 原盤比率表示キャンバス -->
+        <div class="lb-canvas">
+          <img id="lightboxImage" src="" alt="拡大画像">
         </div>
-        <div class="modal-footer d-flex justify-content-between">
+      </div>
+
+      <!-- フッター拡張 -->
+      <div class="modal-footer flex-column align-items-stretch">
+        <!-- 上段: タイトル・メタ情報 -->
+        <div class="d-flex justify-content-between w-100 mb-2">
           <div>
             <div id="lbTitle" class="fw-semibold"></div>
             <div id="lbMeta" class="text-muted small"></div>
           </div>
           <div id="lbTakenAt" class="text-muted small"></div>
+        </div>
+
+        <!-- 中段: アクションボタン -->
+        <div class="d-flex justify-content-end gap-2 w-100 mb-2">
+          <button id="lbLikeBtn" type="button" class="btn btn-sm btn-outline-danger">
+            ♥ いいね <span id="lbLikeCount">0</span>
+          </button>
+          <button id="lbShareBtn" type="button" class="btn btn-sm btn-outline-primary">
+            ↗ 共有
+          </button>
+        </div>
+
+        <!-- 下段: コメント表示 -->
+        <div class="w-100">
+          <div id="lbAuthorComment" class="small mb-1">
+            <span class="fw-bold">投稿者コメント:</span>
+            <span id="lbAuthorCommentText" class="text-muted">（投稿者のコメント表示）</span>
+          </div>
+          <div id="lbAiComment" class="small">
+            <span class="fw-bold">AIコメント:</span>
+            <span id="lbAiCommentText" class="text-muted">（AIによるコメント表示）</span>
+          </div>
+        </div>
+
+        <!-- 閉じる -->
+        <div class="d-flex justify-content-end w-100 mt-2">
           <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">閉じる</button>
         </div>
       </div>
     </div>
   </div>
+</div>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
