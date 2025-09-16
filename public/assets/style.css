@@ -36,15 +36,31 @@
   transform: scale(1.05);
 }
 
-/* ---- タイトルの下側グラデ ---- */
+/* ---- 下側のタイトルエリア ---- */
 .thumb-overlay {
   position: absolute;
   left: 0; right: 0; bottom: 0;
   padding: .5rem .6rem;
-  background: linear-gradient(to top, rgba(0,0,0,.60), rgba(0,0,0,0) 70%) !important;
-  pointer-events: none;   /* クリックは画像へ通す */
+  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0) 70%) !important;
+  pointer-events: none;
   color: #fff;
   z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2px;
+}
+
+/* タイトルと投稿者名のスタイル */
+.thumb-title {
+  font-size: .9rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.thumb-author {
+  font-size: .75rem;
+  opacity: 0.9;
 }
 
 /* ---- 右上の ♥ バッジ ----
