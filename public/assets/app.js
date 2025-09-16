@@ -238,7 +238,7 @@
       img.src = item.thumbUrl || item.imageUrl;
 
       const likeBadge = el(
-        `<span class="badge text-bg-danger like-badge">♥ ${item.likes || 0}</span>`
+  `<span class="badge like-badge">♥ ${item.likes || 0}</span>`
       );
       const overlay = el(
         `<div class="thumb-overlay">
