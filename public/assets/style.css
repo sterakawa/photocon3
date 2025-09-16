@@ -1,92 +1,71 @@
-/* 追加の見た目調整（最小限） */
-.card-thumb {
-  position: relative;
-  overflow: hidden;
-  border-radius: .75rem;
-}
-.card-thumb img {
-  transition: transform .3s ease;
-}
-.card-thumb:hover img {
-  transform: scale(1.05);
-}
+/* =========================================================
+   Photocon Gallery (Bootstrap) - style.css 置き換え版
+   ・赤ベタ対策：背景は常に透明、♥バッジは自前色
+   ・重複定義を整理し、意図しない ::before 背景を無効化
+   ========================================================= */
+
+/* 件数バッジの桁ズレ防止 */
 .badge-count {
   font-variant-numeric: tabular-nums;
 }
-/* 画像カード */
+
+/* ---- カード土台 ---- */
 .card-thumb {
   position: relative;
   overflow: hidden;
   border-radius: .75rem;
+  background: transparent !important;  /* 予防：常に透明 */
 }
 
-/* 画像をきっちりフィット */
-.thumb-img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-/* 下側だけ薄い黒グラデ。全面を覆わない */
-.thumb-overlay {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: .5rem .6rem;
-  background: linear-gradient(to top, rgba(0,0,0,.60), rgba(0,0,0,0) 65%);
-  pointer-events: none; /* クリックを透過 */
-  color: #fff;
-  z-index: 2;
-}
-
-/* 右上の♥バッジは前面に */
-.like-badge {
-  position: absolute;
-  top: .5rem;
-  right: .5rem;
-  z-index: 3;
-}
-
-/* 不要ならコメントアウト（赤一色の原因がこれなら削除）
-.card-thumb::before { ... }
-*/
-/* ==== 赤ベタが出る時の強制リセット ==== */
-/* どの要素にも赤背景が当たっていても透明にする */
-.card-thumb,
+/* ratio ヘルパーの擬似要素も強制透明（赤ベタ対策） */
 .card-thumb::before,
-.ratio,
 .ratio::before {
   background: transparent !important;
 }
 
-/* 画像は常に全面フィット */
-.card-thumb .thumb-img {
-  position: absolute; /* .ratio の子は絶対配置でOK */
+/* ---- 画像 ---- */
+.thumb-img {
+  position: absolute;   /* ratio 内で全面フィット */
   inset: 0;
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform .3s ease;
+}
+.card-thumb:hover .thumb-img {
+  transform: scale(1.05);
 }
 
-/* 下側だけのオーバーレイ。全面を覆わない 
+/* ---- タイトルの下側グラデ ---- */
 .thumb-overlay {
   position: absolute;
   left: 0; right: 0; bottom: 0;
-  top: auto !important;            /* ← ここが重要 */
-  height: auto;
-  min-height: 48px;
   padding: .5rem .6rem;
   background: linear-gradient(to top, rgba(0,0,0,.60), rgba(0,0,0,0) 70%) !important;
-  pointer-events: none;
+  pointer-events: none;   /* クリックは画像へ通す */
   color: #fff;
   z-index: 2;
 }
- */
-/* ♥バッジは右上に固定 */
+
+/* ---- 右上の ♥ バッジ ----
+   ※ Bootstrap の text-bg-* は使わず自前色にする（全面赤の原因対策） */
 .like-badge {
   position: absolute;
-  top: .5rem; right: .5rem;
+  top: .5rem;
+  right: .5rem;
+  padding: .25rem .45rem;
+  border-radius: .5rem;
+  background: rgba(0,0,0,.55) !important; /* 自前の半透明黒 */
+  color: #fff !important;
   z-index: 3;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* 予防：どこかで赤背景が付与されても無効化 */
+.card-thumb,
+.card-thumb *,
+.ratio {
+  background-color: transparent !important;
+  background: transparent !important;
 }
