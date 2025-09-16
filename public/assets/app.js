@@ -171,7 +171,7 @@
       imageUrl: img,
       thumbUrl: thumb,
       title: `新着作品 ${new Date().toLocaleTimeString()}`,
-      author: `demo-user${Math.floor(Math.random() * 90) + 10}`,
+      author: `投稿者${Math.floor(Math.random() * 90) + 10}`,
       takenAt: new Date().toISOString(),
       likes: Math.floor(Math.random() * 120)
     };
@@ -224,33 +224,42 @@
     const grid = el(`<div class="row g-2 g-sm-3"></div>`);
     sorted.forEach((item) => {
       const col = el(`<div class="col-6 col-sm-4 col-md-3 col-lg-2"></div>`);
+
       const card = el(
         `<button type="button" class="w-100 border-0 bg-transparent p-0 text-start"
                  aria-label="${escapeHtml(item.title || '写真を開く')}"></button>`
       );
+
+      // position-relative を明示
       const wrap = el(
-        `<div class="card-thumb ratio ratio-1x1 shadow-sm"></div>`
+        `<div class="card-thumb ratio ratio-1x1 shadow-sm position-relative"></div>`
       );
+
       const img = el(
         `<img class="thumb-img" loading="lazy"
               alt="${escapeHtml(item.title || '作品サムネイル')}">`
       );
       img.src = item.thumbUrl || item.imageUrl;
 
+      // 右上の ♥ バッジ（Bootstrapの text-bg-* は使わない）
       const likeBadge = el(
-  `<span class="badge like-badge">♥ ${item.likes || 0}</span>`
+        `<span class="badge like-badge">♥ ${item.likes || 0}</span>`
       );
-      const overlay = el(`
-  <div class="thumb-overlay">
-    <div class="thumb-title">${item.title}</div>
-    <div class="thumb-author">投稿者${item.author}</div>
-  </div>
-`);
+
+      // 下側オーバーレイ（重なり防止のためクラス指定のみ）
+      const overlay = el(
+        `<div class="thumb-overlay">
+           <div class="thumb-title">${escapeHtml(item.title || 'タイトル未設定')}</div>
+           <div class="thumb-author">${escapeHtml(item.author || '投稿者非公開')}</div>
+         </div>`
+      );
+
       wrap.appendChild(img);
       wrap.appendChild(likeBadge);
       wrap.appendChild(overlay);
       card.appendChild(wrap);
       card.addEventListener('click', () => openLightbox(item));
+
       col.appendChild(card);
       grid.appendChild(col);
     });
