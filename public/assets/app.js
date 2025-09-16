@@ -289,7 +289,23 @@
     m.textContent = `${item.author || '投稿者非公開'} ／ ${item.venue}`;
     d.textContent = item.takenAt ? `撮影日: ${new Date(item.takenAt).toLocaleDateString()}` : '';
 
+    // 画像の向きでキャンバス高さを微調整（比率はCSSで厳守）
+    fitLightboxByOrientation(img);
+
     // Bootstrap Modal
     if (STATE.modal) STATE.modal.show();
+  }
+
+  // 画像の向きでキャンバス高さを微調整（任意）
+  function fitLightboxByOrientation(imgEl){
+    const wrap = imgEl.closest('.lb-canvas');
+    if(!wrap) return;
+    const apply = () => {
+      const portrait = imgEl.naturalHeight > imgEl.naturalWidth;
+      wrap.style.height = portrait ? '80vh' : '70vh';
+    };
+    if (imgEl.complete && imgEl.naturalWidth) apply();
+    else imgEl.onload = apply;
+    window.addEventListener('resize', apply, { once:true });
   }
 })();
