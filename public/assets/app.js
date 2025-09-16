@@ -228,30 +228,29 @@
         `<button type="button" class="w-100 border-0 bg-transparent p-0 text-start"
                  aria-label="${escapeHtml(item.title || '写真を開く')}"></button>`
       );
-      const thumbWrap = el(
-        `<div class="position-relative ratio ratio-1x1 shadow-sm" style="border-radius: .75rem; overflow: hidden;"></div>`
+      const wrap = el(
+        `<div class="card-thumb ratio ratio-1x1 shadow-sm"></div>`
       );
       const img = el(
-        `<img class="w-100 h-100 object-fit-cover" loading="lazy"
+        `<img class="thumb-img" loading="lazy"
               alt="${escapeHtml(item.title || '作品サムネイル')}">`
       );
       img.src = item.thumbUrl || item.imageUrl;
 
       const likeBadge = el(
-        `<span class="badge text-bg-danger position-absolute top-0 end-0 m-2">♥ ${item.likes || 0}</span>`
+        `<span class="badge text-bg-danger like-badge">♥ ${item.likes || 0}</span>`
       );
       const overlay = el(
-        `<div class="position-absolute bottom-0 start-0 end-0 p-2"
-              style="background:linear-gradient(180deg, rgba(0,0,0,0) 0%, rgba(0,0,0,.55) 100%);">
-           <div class="text-white small fw-semibold text-truncate">${escapeHtml(item.title || 'タイトル未設定')}</div>
+        `<div class="thumb-overlay">
+           <div class="small fw-semibold text-truncate">${escapeHtml(item.title || 'タイトル未設定')}</div>
            <div class="text-white-50 small text-truncate">${escapeHtml(item.author || '投稿者非公開')}</div>
          </div>`
       );
 
-      thumbWrap.appendChild(img);
-      thumbWrap.appendChild(likeBadge);
-      thumbWrap.appendChild(overlay);
-      card.appendChild(thumbWrap);
+      wrap.appendChild(img);
+      wrap.appendChild(likeBadge);
+      wrap.appendChild(overlay);
+      card.appendChild(wrap);
       card.addEventListener('click', () => openLightbox(item));
       col.appendChild(card);
       grid.appendChild(col);
