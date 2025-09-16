@@ -275,37 +275,72 @@
     return section;
   }
 
-  // ===== Lightbox =====
-  function openLightbox(item) {
-    STATE.active = item;
-    const img = document.getElementById('lightboxImage');
-    const t = document.getElementById('lbTitle');
-    const m = document.getElementById('lbMeta');
-    const d = document.getElementById('lbTakenAt');
-    if (!img || !t || !m || !d) return;
+ // ===== Lightbox =====
+function openLightbox(item) {
+  STATE.active = item;
 
-    img.src = item.imageUrl;
-    t.textContent = item.title || 'タイトル未設定';
-    m.textContent = `${item.author || '投稿者非公開'} ／ ${item.venue}`;
-    d.textContent = item.takenAt ? `撮影日: ${new Date(item.takenAt).toLocaleDateString()}` : '';
+  // 要素参照
+  const img       = document.getElementById('lightboxImage');
+  const t         = document.getElementById('lbTitle');
+  const m         = document.getElementById('lbMeta');
+  const d         = document.getElementById('lbTakenAt');
+  const likeBtn   = document.getElementById('lbLikeBtn');
+  const likeCount = document.getElementById('lbLikeCount');
+  const shareBtn  = document.getElementById('lbShareBtn');
+  const authorCmt = document.getElementById('lbAuthorCommentText');
+  const aiCmt     = document.getElementById('lbAiCommentText');
 
-    // 画像の向きでキャンバス高さを微調整（比率はCSSで厳守）
-    fitLightboxByOrientation(img);
+  if (!img || !t || !m || !d) return; // 必須だけチェック
 
-    // Bootstrap Modal
-    if (STATE.modal) STATE.modal.show();
-  }
+  // 画像とメタ
+  img.src = item.imageUrl;
+  t.textContent = item.title || 'タイトル未設定';
+  m.textContent = `${item.author || '投稿者非公開'} ／ ${item.venue}`;
+  d.textContent = item.takenAt ? `撮影日: ${new Date(item.takenAt).toLocaleDateString()}` : '';
 
-  // 画像の向きでキャンバス高さを微調整（任意）
-  function fitLightboxByOrientation(imgEl){
-    const wrap = imgEl.closest('.lb-canvas');
-    if(!wrap) return;
-    const apply = () => {
-      const portrait = imgEl.naturalHeight > imgEl.naturalWidth;
-      wrap.style.height = portrait ? '80vh' : '70vh';
+  // コメント（表示専用）
+  if (authorCmt) authorCmt.textContent = item.authorComment || '（投稿者コメントなし）';
+  if (aiCmt)     aiCmt.textContent     = item.aiComment || '（AIコメント未生成）';
+
+  // いいね
+  if (likeBtn && likeCount) {
+    likeCount.textContent = item.likes || 0;
+    likeBtn.onclick = () => {
+      item.likes = (item.likes || 0) + 1;
+      likeCount.textContent = item.likes;
+      // ※ グリッド側へも反映したければ renderVenue(item.venue) など呼ぶ
     };
-    if (imgEl.complete && imgEl.naturalWidth) apply();
-    else imgEl.onload = apply;
-    window.addEventListener('resize', apply, { once:true });
   }
+
+  // 共有（パーマリンクをコピー）
+  if (shareBtn) {
+    shareBtn.onclick = () => {
+      const url = new URL(location.href);
+      url.searchParams.set('photo', item.id);
+      navigator.clipboard.writeText(url.toString())
+        .then(() => alert('作品リンクをコピーしました！'))
+        .catch(() => alert('コピーに失敗しました'));
+    };
+  }
+
+  // 原盤比率での見栄え調整（高さだけ）
+  fitLightboxByOrientation(img);
+
+  // 表示
+  if (STATE.modal) STATE.modal.show();
+}
+
+// 画像の向きでキャンバス高さを微調整（比率は CSS の object-fit: contain が担保）
+function fitLightboxByOrientation(imgEl){
+  const wrap = imgEl.closest('.lb-canvas');
+  if(!wrap) return;
+  const apply = () => {
+    const portrait = imgEl.naturalHeight > imgEl.naturalWidth;
+    wrap.style.height = portrait ? '80vh' : '70vh';
+  };
+  if (imgEl.complete && imgEl.naturalWidth) apply();
+  else imgEl.onload = apply;
+  // モーダルを開くたびに1回だけで十分
+  window.addEventListener('resize', apply, { once:true });
+}
 })();
