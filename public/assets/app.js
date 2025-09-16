@@ -240,13 +240,12 @@
       const likeBadge = el(
   `<span class="badge like-badge">♥ ${item.likes || 0}</span>`
       );
-      const overlay = el(
-        `<div class="thumb-overlay">
-           <div class="small fw-semibold text-truncate">${escapeHtml(item.title || 'タイトル未設定')}</div>
-           <div class="text-white-50 small text-truncate">${escapeHtml(item.author || '投稿者非公開')}</div>
-         </div>`
-      );
-
+      const overlay = el(`
+  <div class="thumb-overlay">
+    <div class="thumb-title">${item.title}</div>
+    <div class="thumb-author">投稿者${item.author}</div>
+  </div>
+`);
       wrap.appendChild(img);
       wrap.appendChild(likeBadge);
       wrap.appendChild(overlay);
