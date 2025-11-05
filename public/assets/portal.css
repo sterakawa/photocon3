@@ -1,1 +1,18 @@
+.hero {
+  background: linear-gradient(135deg, #0d6efd 0%, #0b5ed7 60%, #0a58ca 100%);
+}
+.hero .lead { opacity: .95; }
 
+/* contest cards */
+.contest-card .thumb {
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  width: 100%;
+  border-top-left-radius: .5rem;
+  border-top-right-radius: .5rem;
+}
+.badge-status { font-weight: 600; }
+
+@media (min-width: 992px) {
+  .hero img { max-width: 520px; }
+}
