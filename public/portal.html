@@ -1,1 +1,168 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>フォトコンテスト ポータル</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="./assets/portal.css" rel="stylesheet">
+  <meta name="description" content="開催中・予定のフォトコンテストをまとめたポータル。ギャラリー、募集要項、結果発表へ案内します。">
+</head>
+<body class="bg-light">
 
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary sticky-top shadow-sm">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="./portal.html">フォトコンテスト</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav" aria-controls="nav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div id="nav" class="collapse navbar-collapse">
+        <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+          <li class="nav-item"><a class="nav-link" href="#contests">開催一覧</a></li>
+          <li class="nav-item"><a class="nav-link" href="#howto">参加方法</a></li>
+          <li class="nav-item"><a class="nav-link" href="#news">お知らせ</a></li>
+          <li class="nav-item"><a class="nav-link" href="./index.html">ギャラリー</a></li>
+          <li class="nav-item ms-lg-2">
+            <a class="btn btn-sm btn-warning" href="./index.html">ギャラリーを見る</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero bg-primary text-white">
+    <div class="container py-5">
+      <div class="row align-items-center g-4">
+        <div class="col-lg-7">
+          <h1 class="display-6 fw-bold mb-3">フォトコンテスト ポータル</h1>
+          <p class="lead mb-4">
+            開催中・近日開催のフォトコン情報をまとめてご案内。<br class="d-none d-md-inline">
+            気になるコンテストの<strong>ギャラリー</strong>や<strong>募集要項</strong>、<strong>結果発表</strong>へすぐにアクセスできます。
+          </p>
+          <div class="d-flex gap-2">
+            <a class="btn btn-light btn-lg" href="./index.html">
+              ギャラリーへ
+            </a>
+            <a class="btn btn-outline-light btn-lg" href="#contests">
+              開催一覧を見る
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-5 text-lg-end">
+          <img src="https://picsum.photos/seed/portal-hero/640/360" alt="" class="img-fluid rounded shadow">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main class="container my-5">
+
+    <!-- 開催一覧 -->
+    <section id="contests" class="mb-5">
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="h4 m-0">開催中・近日開催</h2>
+        <div class="btn-group btn-group-sm" role="group" aria-label="filters">
+          <button id="f-all" class="btn btn-outline-secondary active">すべて</button>
+          <button id="f-open" class="btn btn-outline-secondary">開催中</button>
+          <button id="f-soon" class="btn btn-outline-secondary">近日</button>
+          <button id="f-closed" class="btn btn-outline-secondary">終了</button>
+        </div>
+      </div>
+
+      <div id="contestList" class="row g-3 g-md-4">
+        <!-- JSでカードを注入 -->
+      </div>
+    </section>
+
+    <!-- 参加方法（3ステップ） -->
+    <section id="howto" class="mb-5">
+      <h2 class="h4 mb-3">参加方法</h2>
+      <div class="row g-3">
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <div class="badge bg-primary-subtle text-primary-emphasis mb-2">STEP 1</div>
+              <h3 class="h6">コンテストを選ぶ</h3>
+              <p class="text-muted small mb-0">開催中の一覧からテーマを選び、募集要項をご確認ください。</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <div class="badge bg-primary-subtle text-primary-emphasis mb-2">STEP 2</div>
+              <h3 class="h6">写真を投稿</h3>
+              <p class="text-muted small mb-0">指定のフォームから作品・タイトル・コメントを送信します。</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="card h-100 shadow-sm">
+            <div class="card-body">
+              <div class="badge bg-primary-subtle text-primary-emphasis mb-2">STEP 3</div>
+              <h3 class="h6">結果をチェック</h3>
+              <p class="text-muted small mb-0">公開後はギャラリーで閲覧・いいね・共有ができます。</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- お知らせ -->
+    <section id="news" class="mb-5">
+      <h2 class="h4 mb-3">お知らせ</h2>
+      <ul id="newsList" class="list-group shadow-sm">
+        <!-- JSで挿入 -->
+      </ul>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq" class="mb-5">
+      <h2 class="h4 mb-3">よくある質問</h2>
+      <div class="accordion shadow-sm" id="faqAcc">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="q1h">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1c" aria-expanded="true" aria-controls="q1c">
+              参加費はかかりますか？
+            </button>
+          </h2>
+          <div id="q1c" class="accordion-collapse collapse show" aria-labelledby="q1h" data-bs-parent="#faqAcc">
+            <div class="accordion-body small text-muted">
+              基本無料です。コンテストによっては有料・協賛特典などの設定がある場合があります。
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="q2h">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2c" aria-expanded="false" aria-controls="q2c">
+              作品の著作権の扱いは？
+            </button>
+          </h2>
+          <div id="q2c" class="accordion-collapse collapse" aria-labelledby="q2h" data-bs-parent="#faqAcc">
+            <div class="accordion-body small text-muted">
+              著作権は投稿者に帰属します。主催者は規約の範囲で広報利用する場合があります。
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="border-top py-4">
+    <div class="container small text-muted d-flex flex-wrap gap-2 justify-content-between">
+      <div>© 2025 Photocon Portal</div>
+      <div class="d-flex gap-3">
+        <a class="link-secondary" href="#contests">開催一覧</a>
+        <a class="link-secondary" href="./index.html">ギャラリー</a>
+        <a class="link-secondary" href="#faq">FAQ</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="./assets/portal.js"></script>
+</body>
+</html>
